@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: alexkainzinger/compose-action@v2 # this is a fork of `hoverkraft-tech/compose-action`
-        with:
-          compose-file: "./docker-example/compose.yml"
+      - name: run docker compose up
+        shell: bash
+        working-directory: docker-example
+        run: |
+          docker compose up -d --build
