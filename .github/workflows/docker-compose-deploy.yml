@@ -1,0 +1,22 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: isbang/compose-action@v2
+        with:
+          compose-file: "./docker-example/compose.yml"
+          services: |
+            helloworld2
+            helloworld3
