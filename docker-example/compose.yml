@@ -1,0 +1,5 @@
+services:
+  proxy:
+    image: nginx:alpine
+    ports:
+      - 8082:80
