@@ -14,6 +14,5 @@ jobs:
         uses: docker/bake-action@v4
         with:
           workdir: docker-compose-build
-          files:
-            - compose.ci.yaml
+          files: compose.ci.yaml
           push: true
