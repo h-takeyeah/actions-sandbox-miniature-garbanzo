@@ -2,3 +2,5 @@ services:
   hello-world:
     image: ghcr.io/h-takeyeah/hello-world:${DOCKER_IMAGE_TAG_CI}
     build: .
+    tags:
+      - ghcr.io/h-takeyeah/hello-world:latest
