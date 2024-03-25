@@ -3,6 +3,10 @@ name: Build / Push Docker Image to Registry
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-and-push:
     name: Build / Push
@@ -10,6 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: h-takeyeah
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker Buildx Bake
         uses: docker/bake-action@v4
         with:
