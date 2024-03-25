@@ -1,4 +1,4 @@
 services:
   hello-world:
-    image: ghcr.io/h-takeyeah/hello-world
+    image: ghcr.io/h-takeyeah/hello-world:${DOCKER_IMAGE_TAG_CI}
     build: .
