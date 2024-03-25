@@ -13,6 +13,7 @@ jobs:
       - name: Docker Buildx Bake
         uses: docker/bake-action@v4
         with:
-          source: docker-compose-build
-          files: compose.ci.yaml
+          workdir: docker-compose-build
+          files:
+            - compose.ci.yaml
           push: true
