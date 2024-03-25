@@ -1,4 +1,4 @@
 services:
   hello-world:
-    image: ghcr.io/actions-sandbox-miniature-garbanzo/hello-world
+    image: ghcr.io/h-takeyeah/hello-world
     build: .
