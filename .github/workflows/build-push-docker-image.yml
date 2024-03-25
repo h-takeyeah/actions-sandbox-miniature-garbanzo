@@ -1,0 +1,18 @@
+name: Build / Push Docker Image to Registry
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    name: Build / Push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Docker Buildx Bake
+        uses: docker/bake-action@v4
+        with:
+          source: docker-compose-build
+          files: compose.ci.yaml
+          push: true
