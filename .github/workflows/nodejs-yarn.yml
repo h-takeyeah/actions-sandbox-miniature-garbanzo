@@ -1,4 +1,4 @@
-name: nodejs-yarn
+name: Node.js with yarn
 
 on:
   workflow_dispatch:
