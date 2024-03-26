@@ -3,6 +3,10 @@ name: Build yarn project
 on:
   workflow_dispatch:
 
+default:
+  run:
+    working-directory: yaml-project-sample
+
 jobs:
   build:
     name: Build
