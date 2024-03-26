@@ -14,6 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # https://github.com/actions/setup-node/issues/480#issuecomment-1820622085
+      # > enable corepack before setup-node.
+      - name: Enable Corepack
+        run: corepack enable
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
