@@ -5,7 +5,7 @@ on:
 
 defaults:
   run:
-    working-directory: yaml-project-sample
+    working-directory: yarn-project-sample
 
 jobs:
   build:
