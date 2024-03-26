@@ -1,11 +1,11 @@
-name: Node.js with yarn
+name: Build yarn project
 
 on:
   workflow_dispatch:
 
 jobs:
-  install_build:
-    name: Install / Build
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
