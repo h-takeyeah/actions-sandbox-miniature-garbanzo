@@ -26,7 +26,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Generate OpenAPI Document as HTML
-        run: npx @redocly/cli build-doc ./oapi-petstore/petstore.yaml --output=./_site/index.html
+        run: npx @redocly/cli build-docs ./oapi-petstore/petstore.yaml --output=./_site/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
   deploy:
