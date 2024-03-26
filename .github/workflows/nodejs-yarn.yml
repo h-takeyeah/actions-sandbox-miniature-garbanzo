@@ -2,17 +2,10 @@ name: nodejs-yarn
 
 on:
   workflow_dispatch:
-    inputs:
-      description: "Select which job to run"
-      required: true
-      default: "install"
-      type: choice
-      options:
-        - install
 
 jobs:
-  install:
-    name: Install
+  install_build:
+    name: Install / Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,3 +17,4 @@ jobs:
 
       - name: Install dependencies
         run: yarn
+      # TODO: build
