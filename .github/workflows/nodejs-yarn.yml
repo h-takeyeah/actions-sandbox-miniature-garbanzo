@@ -1,0 +1,26 @@
+name: nodejs-yarn
+
+on:
+  workflow_dispatch:
+    inputs:
+      description: "Select which job to run"
+      required: true
+      default: "install"
+      type: choice
+      options:
+        - install
+
+jobs:
+  install:
+    name: Install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn
