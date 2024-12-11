@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  env:
     runs-on: self-hosted
 
     steps:
