@@ -1,0 +1,16 @@
+name: Print env
+
+permissions: {}
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: print env
+        run: env
+      - name: cat .bashrc
+        run: cat ~/.bashrc
