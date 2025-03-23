@@ -28,7 +28,7 @@ jobs:
           echo "DOCKER_IMAGE_TAG_CI=$TAG" >> $GITHUB_ENV
           echo TAG $TAG
       - name: Docker Buildx Bake
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v6
         with:
           workdir: docker-compose-build
           files: compose.ci.yaml
