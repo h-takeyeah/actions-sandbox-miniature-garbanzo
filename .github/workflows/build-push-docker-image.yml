@@ -2,6 +2,9 @@ name: Build / Push Docker Image to Registry
 
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
 
 permissions:
   contents: read
@@ -23,8 +26,7 @@ jobs:
       - name: Generate Docker Image Tag
         # https://qiita.com/yu-ichiro/items/c1a1248c0cdeeb0e6b42
         run: |
-          SHA=${{ github.sha }}
-          TAG=$(TZ=UTC-9 date "+%Y%m")-${SHA:0:7}
+          TAG=$(TZ=UTC-9 date "+%Y%m")-${GITHUB_SHA:0:7}
           echo "DOCKER_IMAGE_TAG_CI=$TAG" >> $GITHUB_ENV
           echo TAG $TAG
       - name: Docker Buildx Bake
@@ -33,4 +35,7 @@ jobs:
           source: .
           workdir: docker-compose-build
           files: compose.ci.yaml
+          set: |
+            *.labels.org.opencontainers.image.version=$GITHUB_REF_NAME
+            *.labels.org.opencontainers.image.revision=$GITHUB_SHA
           push: true
