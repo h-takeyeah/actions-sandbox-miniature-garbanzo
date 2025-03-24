@@ -27,6 +27,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           image: "" # empty
+          tags: |
+            type=sha,format=short
+            type=semver,pattern={{version}}
       - name: Upload metadatafile
         uses: actions/upload-artifact@v4
         with:
