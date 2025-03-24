@@ -26,8 +26,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images:
-            name=ghcr.io/h-takeyeah/hello-world
+          image: "" # empty
       - name: Upload metadatafile
         uses: actions/upload-artifact@v4
         with:
