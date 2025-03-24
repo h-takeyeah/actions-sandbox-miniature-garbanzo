@@ -25,12 +25,15 @@ jobs:
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
+        with:
+          images:
+            name=ghcr.io/h-takeyeah/hello-world
       - name: Upload metadatafile
         uses: actions/upload-artifact@v4
         with:
           path: |
-            cwd://${{ steps.meta.outputs.bake-file-tags }}
-            cwd://${{ steps.meta.outputs.bake-file-annotations }}
+            ${{ steps.meta.outputs.bake-file-tags }}
+            ${{ steps.meta.outputs.bake-file-annotations }}
       - name: Docker Buildx Bake
         uses: docker/bake-action@v6
         with:
