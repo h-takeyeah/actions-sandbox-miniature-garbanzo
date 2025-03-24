@@ -1,5 +1,7 @@
 services:
+  docker-metadata-action: &meta {}
   hello-world: &default-hello-world
+    << : *meta
     image: ghcr.io/h-takeyeah/hello-world:${DOCKER_IMAGE_TAG_CI}
     build: .
   latest-hello-world: # just for tagging

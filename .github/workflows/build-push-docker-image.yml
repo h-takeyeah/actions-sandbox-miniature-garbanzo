@@ -22,18 +22,8 @@ jobs:
           registry: ghcr.io
           username: h-takeyeah
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Generate Docker Image Tag
-        # https://qiita.com/yu-ichiro/items/c1a1248c0cdeeb0e6b42
-        run: |
-          TAG=$(TZ=UTC-9 date "+%Y%m")-${GITHUB_SHA:0:7}
-          echo "DOCKER_IMAGE_TAG_CI=$TAG" >> $GITHUB_ENV
-          echo TAG $TAG
-      - name: Prepare Labels
-        id: label-generator
-        run: |
-          echo ORG_OPENCONTAINER_IMAGE_CREATED="$(date --rfc-3339=seconds)" >> $GITHUB_OUTPUT
-          echo ORG_OPENCONTAINER_IMAGE_VERSION="$(echo $GITHUB_REF_NAME | sed 's/^v//')" >> $GITHUB_OUTPUT
       - name: Docker meta
+        id: meta
         uses: docker/metadata-action@v5
       - name: Upload metadatafile
         uses: actions/upload-artifact@v4
