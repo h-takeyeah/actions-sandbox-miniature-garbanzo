@@ -1,7 +1,6 @@
 name: Build / Push Docker Image to Registry
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - 'v*'
@@ -29,13 +28,22 @@ jobs:
           TAG=$(TZ=UTC-9 date "+%Y%m")-${GITHUB_SHA:0:7}
           echo "DOCKER_IMAGE_TAG_CI=$TAG" >> $GITHUB_ENV
           echo TAG $TAG
+      - name: Prepare Labels
+        id: label-generator
+        run: |
+          echo "ORG_OPENCONTAINER_IMAGE_CREATED=\"$(date --rfc-3339=seconds)\"" >> $GITHUB_OUTPUT
+          echo "ORG_OPENCONTAINER_IMAGE_VERSION=\"$(echo $GITHUB_REF_NAME | sed 's/^v//')\"" >> $GITHUB_OUTPUT
       - name: Docker Buildx Bake
         uses: docker/bake-action@v6
+        env:
+          IMAGE_CREATED: ${{ steps.label-generator.outputs.ORG_OPENCONTAINER_IMAGE_CREATED }}
+          IMAGE_VERSION: ${{ steps.label-generator.outputs.ORG_OPENCONTAINER_IMAGE_VERSION }}
         with:
           source: .
           workdir: docker-compose-build
           files: compose.ci.yaml
           set: |
-            *.labels.org.opencontainers.image.version=$GITHUB_REF_NAME
+            *.labels.org.opencontainers.image.created=$IMAGE_CREATED
             *.labels.org.opencontainers.image.revision=$GITHUB_SHA
+            *.labels.org.opencontainers.image.version=$IMAGE_VERSION
           push: true
