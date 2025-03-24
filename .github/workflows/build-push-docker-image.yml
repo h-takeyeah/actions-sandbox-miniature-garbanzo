@@ -40,7 +40,7 @@ jobs:
           source: .
           workdir: docker-compose-build
           files: |
-            compose.ci.yaml
+            docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file-tags }}
             cwd://${{ steps.meta.outputs.bake-file-annotations }}
           push: true
