@@ -36,7 +36,7 @@ jobs:
       - name: Docker meta
         uses: docker/metadata-action@v5
       - name: Upload metadatafile
-        uses: actions/uploatd-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           path: |
             cwd://${{ steps.meta.outputs.bake-file-tags }}
