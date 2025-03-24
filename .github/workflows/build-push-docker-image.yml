@@ -31,8 +31,8 @@ jobs:
       - name: Prepare Labels
         id: label-generator
         run: |
-          echo "ORG_OPENCONTAINER_IMAGE_CREATED=\"$(date --rfc-3339=seconds)\"" >> $GITHUB_OUTPUT
-          echo "ORG_OPENCONTAINER_IMAGE_VERSION=\"$(echo $GITHUB_REF_NAME | sed 's/^v//')\"" >> $GITHUB_OUTPUT
+          echo ORG_OPENCONTAINER_IMAGE_CREATED="$(date --rfc-3339=seconds)" >> $GITHUB_OUTPUT
+          echo ORG_OPENCONTAINER_IMAGE_VERSION="$(echo $GITHUB_REF_NAME | sed 's/^v//')" >> $GITHUB_OUTPUT
       - name: Docker Buildx Bake
         uses: docker/bake-action@v6
         with:
