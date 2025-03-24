@@ -33,14 +33,21 @@ jobs:
         run: |
           echo ORG_OPENCONTAINER_IMAGE_CREATED="$(date --rfc-3339=seconds)" >> $GITHUB_OUTPUT
           echo ORG_OPENCONTAINER_IMAGE_VERSION="$(echo $GITHUB_REF_NAME | sed 's/^v//')" >> $GITHUB_OUTPUT
+      - name: Docker meta
+        uses: docker/metadata-action@v5
+      - name: Upload metadatafile
+        uses: actions/uploatd-artifact@v4
+        with:
+          path: |
+            cwd://${{ steps.meta.outputs.bake-file-tags }}
+            cwd://${{ steps.meta.outputs.bake-file-annotations }}
       - name: Docker Buildx Bake
         uses: docker/bake-action@v6
         with:
           source: .
           workdir: docker-compose-build
-          files: compose.ci.yaml
-          set: |
-            *.labels.org.opencontainers.image.created=${{ steps.label-generator.outputs.ORG_OPENCONTAINER_IMAGE_CREATED }}
-            *.labels.org.opencontainers.image.revision=${{ github.sha }}
-            *.labels.org.opencontainers.image.version=${{ steps.label-generator.outputs.ORG_OPENCONTAINER_IMAGE_VERSION }}
+          files: |
+            compose.ci.yaml
+            cwd://${{ steps.meta.outputs.bake-file-tags }}
+            cwd://${{ steps.meta.outputs.bake-file-annotations }}
           push: true
