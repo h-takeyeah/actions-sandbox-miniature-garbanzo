@@ -30,19 +30,17 @@ jobs:
           tags: |
             type=sha,format=short
             type=semver,pattern={{version}}
-      - name: Upload metadatafile
-        uses: actions/upload-artifact@v4
-        with:
-          path: |
-            ${{ steps.meta.outputs.bake-file-tags }}
-            ${{ steps.meta.outputs.bake-file-labels }}
-            ${{ steps.meta.outputs.bake-file-annotations }}
-            ${{ steps.meta.outputs.bake-file }}
       - name: Docker Buildx Bake
         uses: docker/bake-action@v6
         with:
           source: .
           workdir: docker-compose-build
+          # filesについて
+          # - 下に書いてあるようにlabelesとtagsを一緒にしたbake-fileを使うのがベター
+          #
+          # - もしbake-file-*を個別に渡すときは今回docker-bake.hclの中でtagを参照している
+          #   のでbake-file-tagsがリストの最後に来るようにする必要がある
+          #   (tags以外が最後に来るとtags==nullなtargetで上書きされてしまう)
           files: |
             docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file }}
