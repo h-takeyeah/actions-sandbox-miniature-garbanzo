@@ -35,7 +35,9 @@ jobs:
         with:
           path: |
             ${{ steps.meta.outputs.bake-file-tags }}
+            ${{ steps.meta.outputs.bake-file-labels }}
             ${{ steps.meta.outputs.bake-file-annotations }}
+            ${{ steps.meta.outputs.bake-file }}
       - name: Docker Buildx Bake
         uses: docker/bake-action@v6
         with:
@@ -43,6 +45,5 @@ jobs:
           workdir: docker-compose-build
           files: |
             docker-bake.hcl
-            cwd://${{ steps.meta.outputs.bake-file-tags }}
-            cwd://${{ steps.meta.outputs.bake-file-annotations }}
+            cwd://${{ steps.meta.outputs.bake-file }}
           push: true
