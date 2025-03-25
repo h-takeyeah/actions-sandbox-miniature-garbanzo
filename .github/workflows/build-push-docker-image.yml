@@ -30,7 +30,7 @@ jobs:
             type=sha,format=short
             type=semver,pattern={{version}}
           labels: |
-            org.opencontainers.image.description="this is customized description"
+            org.opencontainers.image.description=this is customized description
       - name: Docker Buildx Bake
         uses: docker/bake-action@v6
         with:
