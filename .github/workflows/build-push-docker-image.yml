@@ -2,6 +2,8 @@ name: Build / Push Docker Image to Registry
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
 
@@ -27,7 +29,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           tags: |
-            type=sha,format=short
+            type=edge
+            type=sha,format=short,prefix=
             type=semver,pattern={{version}}
           labels: |
             org.opencontainers.image.description=this is customized description
