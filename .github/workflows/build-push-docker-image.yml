@@ -34,7 +34,7 @@ jobs:
         with:
           tags: |
             type=edge
-            type=sha,format=short,prefix=
+            type=sha,format=short
             type=semver,pattern={{version}}
           labels: |
             org.opencontainers.image.description=Containernized helloworld written in Go
