@@ -37,7 +37,7 @@ jobs:
           annotations: |
             org.opencontainers.image.description=Containernized helloworld written in Go
       - name: Set up Docker Buildx
-        uses: docker/set-buildx-action@v3
+        uses: docker/setup-buildx-action@v3
         with:
           driver: docker-container # Set explicitly for clarification, though "docker-container" is the default value
       - name: Docker Buildx Bake
