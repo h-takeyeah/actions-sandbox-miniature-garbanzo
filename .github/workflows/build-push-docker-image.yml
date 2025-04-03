@@ -57,6 +57,7 @@ jobs:
           #   (tags以外が最後に来るとtags==nullなtargetで上書きされてしまう)
           files: |
             docker-bake.hcl
+            cwd://${{ steps.meta.outputs.bake-file-annotations }}
             cwd://${{ steps.meta.outputs.bake-file }}
           push: true
           set: |
