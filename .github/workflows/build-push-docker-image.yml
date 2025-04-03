@@ -39,6 +39,8 @@ jobs:
           labels: |
             org.opencontainers.image.description=Containernized helloworld written in Go
         env:
+          # To add a description to multi arch image, annotations must appear in **index** level.
+          # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#adding-a-description-to-multi-arch-images
           DOCKER_METADATA_ANNOTATIONS_LEVELS: index,manifest
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -55,14 +57,12 @@ jobs:
           # - もしbake-file-*を個別に渡すときは今回docker-bake.hclの中でtagを参照している
           #   のでbake-file-tagsがリストの最後に来るようにする必要がある
           #   (tags以外が最後に来るとtags==nullなtargetで上書きされてしまう)
+          # - annotations は Container Registry 上に説明を表示させるためにつける
           files: |
             docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file-annotations }}
             cwd://${{ steps.meta.outputs.bake-file }}
           push: true
-          # https://github.com/docker/buildx/issues/1533
-          # https://github.com/orgs/community/discussions/45969
-          #provenance: false
           set: |
             *.cache-from=type=gha,scope=image
             *.cache-to=type=gha,scope=image
