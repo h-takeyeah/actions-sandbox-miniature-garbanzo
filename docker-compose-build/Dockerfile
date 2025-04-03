@@ -15,8 +15,5 @@ EOF
 RUN go build -v -o /tmp/hello-world main.go
 
 FROM scratch
-LABEL org.opencontainers.image.source=https://github.com/h-takeyeah/actions-sandbox-miniature-garbanzo
-LABEL org.opencontainers.image.description="hello world image"
-LABEL org.opencontainers.image.licenses=MIT
 COPY --from=build /tmp/hello-world .
 CMD ["./hello-world"]
