@@ -57,6 +57,8 @@ jobs:
             docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file }}
           push: true
+          # https://github.com/docker/buildx/issues/1533
+          # https://github.com/orgs/community/discussions/45969
           provenance: false
           set: |
             *.cache-from=type=gha,scope=image
