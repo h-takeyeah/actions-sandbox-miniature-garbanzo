@@ -57,6 +57,7 @@ jobs:
             docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file }}
           push: true
+          provenance: false
           set: |
             *.cache-from=type=gha,scope=image
             *.cache-to=type=gha,scope=image
