@@ -6,6 +6,8 @@ on:
       - main
     tags:
       - 'v*'
+    paths:
+      - 'docker-compose-build'
 
 permissions:
   contents: read
