@@ -7,7 +7,8 @@ on:
     tags:
       - 'v*'
     paths:
-      - 'docker-compose-build'
+      - 'docker-compose-build/docker-bake.hcl'
+      - 'docker-compose-build/Dockerfile'
 
 permissions:
   contents: read
