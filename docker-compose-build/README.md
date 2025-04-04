@@ -67,7 +67,7 @@ See also:
 First of all, if there are no builder whose type is "docker-container", then create new one.
 ```
 docker builder ls # Is there at least 1 builder whose driver is "docker-cotainer"?
-docker buildx create --name container --driver docker-container --use --bootstrap
+docker buildx create --name container --driver docker-container --bootstrap
 ```
 
 **ex1** To get metadata manifests
