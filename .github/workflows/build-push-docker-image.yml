@@ -40,10 +40,10 @@ jobs:
             org.opencontainers.image.description=Containernized helloworld written in Go
           annotations: |
             org.opencontainers.image.description=Containernized helloworld written in Go
-        env:
-          # To add a description to multi arch image, annotations must appear in **index** level.
-          # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#adding-a-description-to-multi-arch-images
-          DOCKER_METADATA_ANNOTATIONS_LEVELS: index,manifest
+        #env:
+        # # To add a description to multi arch image, annotations must appear in **index** level.
+        # # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#adding-a-description-to-multi-arch-images
+        # DOCKER_METADATA_ANNOTATIONS_LEVELS: index,manifest
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
@@ -65,7 +65,8 @@ jobs:
             cwd://${{ steps.meta.outputs.bake-file-annotations }}
             cwd://${{ steps.meta.outputs.bake-file }}
           #push: true
+          provenance: false
           set: |
             *.cache-from=type=gha,scope=image
             *.cache-to=type=gha,scope=image
-            *.output=type=image,push=true,oci-mediatypes=false
+            *.output=type=image,push=true,oci-mediatypes=true
