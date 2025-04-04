@@ -62,7 +62,8 @@ jobs:
             docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file-annotations }}
             cwd://${{ steps.meta.outputs.bake-file }}
-          push: true
+          #push: true
           set: |
             *.cache-from=type=gha,scope=image
             *.cache-to=type=gha,scope=image
+            *.output=type=image,push=true,oci-mediatypes=false
